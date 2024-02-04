@@ -1,0 +1,12 @@
+---
+
+- name: Create User
+  gather_facts: false
+  hosts: dev
+  tasks:
+
+    - name: Create a folder named after the user in /tmp
+      file:
+          path: "/tmp/{{user_name}}"
+          state: directory
+          mode: '0755'
