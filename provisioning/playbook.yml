@@ -3,6 +3,7 @@
 - name: Create User
   gather_facts: false
   hosts: dev
+  become: true
   tasks:
 
     - name: Create a folder named after the user in /tmp
@@ -10,3 +11,8 @@
           path: "/tmp/{{user_name}}"
           state: directory
           mode: '0755'
+
+    - name: Create a file with a template
+      template:
+        src: "motd.j2"
+        dest: /etc/motd
