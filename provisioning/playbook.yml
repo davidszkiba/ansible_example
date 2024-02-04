@@ -16,3 +16,14 @@
       template:
         src: "motd.j2"
         dest: /etc/motd
+
+    - name: Ensure group "nginx" exists
+      ansible.builtin.group:
+        name: nginx
+        state: present
+
+    - name: Create a user
+      user:
+        name: "{{user_name}}"
+        groups: "nginx"
+        append: true # Do not remove existing groups.
